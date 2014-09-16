@@ -6,6 +6,9 @@ Transparent conductive layer solver
 Calculate the thickness, sheet resistance, resistivity, conductivity, mobility and carrier density of transparent conductive layers. 
 
 Example
+
+Run the TClayer.py module
+
 ```
 Python 3.3.4 (v3.3.4:7ff62415e426, Feb 10 2014, 18:13:51) [MSC v.1600 64 bit (AMD64)] on win32
 Type "copyright", "credits" or "license()" for more information.
