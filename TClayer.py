@@ -117,7 +117,7 @@ class TClayer:
         # Solve the thickness    
         if self.thickness is None :
             # Calcul from the resistivity and sheet resistance
-            if (self.resisitivity is not None) & (self.sheetResistance is not None) :
+            if (self.resistivity is not None) & (self.sheetResistance is not None) :
                 self.thickness = self.resistivity / (self.sheetResistance * 0.0000001)
             else :
                 self.msg = self.msg + "Not enough input data to solve the thickness\n"
@@ -125,7 +125,7 @@ class TClayer:
         # Solve the sheet resistance    
         if self.sheetResistance is None :
             # Calcul from the resistivity and thickness
-            if (self.resisitivity is not None) & (self.thickness is not None) :
+            if (self.resistivity is not None) & (self.thickness is not None) :
                 self.sheetResistance = self.resistivity / (self.thickness * 0.0000001)
             else :
                 self.msg = self.msg + "Not enough input data to solve the sheet resistance\n"
