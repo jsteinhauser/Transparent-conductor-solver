@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+
 class TClayer:
-    """ Tranparent Conductive Layer
+    """ Transparent Conductive Layer
         Thickness (nm);         Sheet Resistance (Ohms square)
         Resistivity (Ohms.cm);  Conductivity (S)
         Mobility (cm2.V-1.s-1); Carrier density (cm-3)
