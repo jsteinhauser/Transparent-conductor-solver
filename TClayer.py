@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-
 class TClayer:
-    """ Transparent Conductive Layer
+    """ Tranparent Conductive Layer
         Thickness (nm);         Sheet Resistance (Ohms square)
         Resistivity (Ohms.cm);  Conductivity (S)
         Mobility (cm2.V-1.s-1); Carrier density (cm-3)
@@ -31,11 +29,13 @@ class TClayer:
     def getResistivity(self):
         return self.resistivity
     def getConductivity(self):
-        return conductivity
+        return self.conductivity
     def getMobility(self):
         return self.mobility
     def getCarrierDensity(self):
         return self.carrierDensity
+    def getMsg(self):
+        return self.msg
 
     # Setters
     def setThickness(self, newValue):
@@ -93,56 +93,50 @@ class TClayer:
         self.testConflict()
         
         # Solve the resistivity    
-        if self.resistivity is None :
-            # Calcul from the conductivity
-            if self.conductivity is not None :
-                self.resistivity = 1 / self.conductivity
-            # Calcul from thickness and sheet resistance
-            elif (self.thickness is not None) & (self.sheetResistance is not None) :
-                self.resistivity = self.sheetResistance * self.thickness * 0.0000001
-            # Calcul from mobility and carrier density
-            elif (self.mobility is not None) & (self.carrierDensity is not None) :
-                self.resistivity = 1 / (self.carrierDensity * self.mobility * 1.602E-19)
-            else :
-                self.msg = self.msg + "Not enough input data to solve the resistivity\n"
+        # Calcul from the conductivity
+        if self.conductivity is not None :
+            self.resistivity = 1 / self.conductivity
+        # Calcul from thickness and sheet resistance
+        elif (self.thickness is not None) & (self.sheetResistance is not None) :
+            self.resistivity = self.sheetResistance * self.thickness * 0.0000001
+        # Calcul from mobility and carrier density
+        elif (self.mobility is not None) & (self.carrierDensity is not None) :
+            self.resistivity = 1 / (self.carrierDensity * self.mobility * 1.602E-19)
+        else :
+            self.msg = self.msg + "Not enough input data to solve the resistivity\n"
 
         # Solve the conductivity    
-        if self.conductivity is None :
-            # Calcul from the resistivity
-            if self.resistivity is not None :
-                self.conductivity = 1 / self.resistivity
-            else :
-                self.msg = self.msg + "Not enough input data to solve the conductivity\n"
+        # Calcul from the resistivity
+        if self.resistivity is not None :
+            self.conductivity = 1 / self.resistivity
+        else :
+            self.msg = self.msg + "Not enough input data to solve the conductivity\n"
 
         # Solve the thickness    
-        if self.thickness is None :
-            # Calcul from the resistivity and sheet resistance
-            if (self.resistivity is not None) & (self.sheetResistance is not None) :
-                self.thickness = self.resistivity / (self.sheetResistance * 0.0000001)
-            else :
-                self.msg = self.msg + "Not enough input data to solve the thickness\n"
+        # Calcul from the resistivity and sheet resistance
+        if (self.resistivity is not None) & (self.sheetResistance is not None) :
+            self.thickness = self.resistivity / (self.sheetResistance * 0.0000001)
+        else :
+            self.msg = self.msg + "Not enough input data to solve the thickness\n"
 
-        # Solve the sheet resistance    
-        if self.sheetResistance is None :
-            # Calcul from the resistivity and thickness
-            if (self.resistivity is not None) & (self.thickness is not None) :
-                self.sheetResistance = self.resistivity / (self.thickness * 0.0000001)
-            else :
-                self.msg = self.msg + "Not enough input data to solve the sheet resistance\n"
+        # Solve the sheet resistance   
+        # Calcul from the resistivity and thickness
+        if (self.resistivity is not None) & (self.thickness is not None) :
+            self.sheetResistance = self.resistivity / (self.thickness * 0.0000001)
+        else :
+            self.msg = self.msg + "Not enough input data to solve the sheet resistance\n"
 
         # Solve the carrier density    
-        if self.carrierDensity is None :
-            # Calcul from the conductivity and the mobility
-            if (self.conductivity is not None) & (self.mobility is not None) :
-                self.carrierDensity = self.conductivity / (self.mobility * 1.602E-19)
-            else :
-                self.msg = self.msg + "Not enough input data to solve the carrier density\n"
+        # Calcul from the conductivity and the mobility
+        if (self.conductivity is not None) & (self.mobility is not None) :
+            self.carrierDensity = self.conductivity / (self.mobility * 1.602E-19)
+        else :
+            self.msg = self.msg + "Not enough input data to solve the carrier density\n"
 
         # Solve the mobility    
-        if self.mobility is None :
-            # Calcul from the conductivity and thecarrier density
-            if (self.conductivity is not None) & (self.carrierDensity is not None) :
-                self.mobility = self.conductivity / (self.carrierDensity * 1.602E-19)
-            else :
-                self.msg = self.msg + "Not enough input data to solve the mobility\n"
+        # Calcul from the conductivity and thecarrier density
+        if (self.conductivity is not None) & (self.carrierDensity is not None) :
+            self.mobility = self.conductivity / (self.carrierDensity * 1.602E-19)
+        else :
+            self.msg = self.msg + "Not enough input data to solve the mobility\n"
 
